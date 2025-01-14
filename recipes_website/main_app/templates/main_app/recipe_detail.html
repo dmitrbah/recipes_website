@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{recipe.name}}{% endblock %}
+{% block content %}
+<h1>{{recipe.name}}</h1>
+<p>
+  Published {{recipe.published}} by {{recipe.author}}
+</p>
+<p>Краткое описание рецепта: {{recipe.description}}</p>
+<p>Время приготовления: {{recipe.cooking_time}}</p>
+{{recipe.cooking_instructions|linebreaks}}
+{% endblock %}

@@ -17,7 +17,7 @@ class Recipe(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_recipes')
     description = models.CharField(max_length=200)
     cooking_instructions = models.TextField()
-    cooking_time = models.CharField(max_length=10, blank=True, null=True)
+    cooking_time = models.CharField(max_length=30, blank=True, null=True)
     published = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
