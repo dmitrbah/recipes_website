@@ -4,7 +4,7 @@
     <h1>Сайт с рецептами</h1>
     {% for recipe in recipes %}
         <h2>
-            <a href="{% url 'main_app:recipe_detail' recipe.id %}">{{recipe.name}}</a>
+            <a href="{{recipe.get_absolute_url}}">{{recipe.name}}</a>
         </h2>
         <p>
             Published {{recipe.published}} by {{recipe.author}}

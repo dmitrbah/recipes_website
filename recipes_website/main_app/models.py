@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -13,7 +14,7 @@ class Recipe(models.Model):
         PUBLISHED = 'PB', 'Published'
 
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique_for_date='published')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_recipes')
     description = models.CharField(max_length=200)
     cooking_instructions = models.TextField()
@@ -37,3 +38,9 @@ class Recipe(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    def get_absolute_url(self):
+        return reverse('main_app:recipe_detail', args=[self.slug,
+                                                       self.published.year,
+                                                       self.published.month,
+                                                       self.published.day])
