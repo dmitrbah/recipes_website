@@ -11,4 +11,5 @@
         </p>
         {{recipe.description|truncatewords:30|linebreaks}}
     {% endfor %}
+    {% include "pagination.html" with page=recipes %}
 {% endblock %}
