@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Оставьте комментарий{% endblock %}
+
+{% block content %}
+    {% if comment %}
+        <h2>Ваш комментарий был добавлен</h2>
+        <p><a href="{{recipe.get_absolute_url}}">Обратно к рецепту</a></p>
+    {% else %}
+        {% include "main_app/includes/comment_form.html" %}
+    {% endif %}
+{% endblock %}
