@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main_app.css' %}">
+</head>
+<body>
+<!--    <img id="logo" src="{% static 'img/logo.png' %}" height="50" width="auto">-->
+    <header>
+        <a class="header-links" href="{% url 'main_app:recipe_list' %}">  Главная |</a>
+        <a class="header-links" href="{% url 'main_app:recipe_search' %}"> Поиск рецепта |</a>
+        <a class="header-links" href="{% url 'main_app:add_recipe' %}"> Добавить рецепт</a>
+    </header>
+    <div id="content">
+        {% block content %} {% endblock %}
+    </div>
+    <div id="sidebar">
+        {% if user.is_authenticated %}
+            <p>Привет {{ user.username }}!</p>
+            <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <a href="#" onclick="parentNode.submit();">Log Out</a>
+            </form>
+            {% if user.user_recipes.all %}
+                <p>Ваши рецепты: </p>
+                <ul>
+                {% for recipe in user.user_recipes.all %}
+                        <li><a href="{{recipe.get_absolute_url}}">{{recipe.name}}</a></li>
+                {% endfor %}
+                    </ul>
+            {% endif %}
+        {% else %}
+            <p>Вы не вошли в аккаунт <a href="{% url 'login' %}">Log In</a></p>
+            <p>Нет аккаунта? Зарегистрируйтесь! <a href="{% url 'signup' %}">Sign Up</a></p>
+
+
+        {% endif %}
+
+    </div>
+</body>
+</html>

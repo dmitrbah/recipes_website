@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Добавление рецепта{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <form action="{% url 'main_app:add_recipe' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Добавьте рецепт"></p>
+</form>
+{% else %}
+<h2>Для того, чтобы добавить рецепт Вам необходимо войти в аккаунт</h2>
+<p>Войдите в аккаунт <a href="{% url 'login' %}">Log In</a></p>
+<p>Нет аккаунта? Зарегистрируйтесь! <a href="{% url 'signup' %}">Sign Up</a></p>
+{% endif %}
+{% endblock %}

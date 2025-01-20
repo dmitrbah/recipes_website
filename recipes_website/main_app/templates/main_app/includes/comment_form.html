@@ -1,0 +1,7 @@
+<h2>Оставьте новый комментарий</h2>
+<p></p>
+<form action="{% url 'main_app:post_comment' recipe.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Добавьте комментарий"></p>
+</form>

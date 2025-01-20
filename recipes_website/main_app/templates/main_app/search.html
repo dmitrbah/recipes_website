@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+    {% if query %}
+        <h1>
+            Результаты поиска запроса "{{query}}"
+        </h1>
+        {% for recipe in results %}
+            <h1>Найдены следующие результаты:</h1>
+            <h4>
+                <a href="{{recipe.get_absolute_url}}">{{recipe.name}}</a>
+            </h4>
+            {{recipe.description|truncatewords:15}}
+        {% empty %}
+            <p>Результаты поиска отсутствуют</p>
+        {% endfor %}
+            <p><a href="{% url 'main_app:recipe_search' %}">Повторный поиск рецепта</a></p>
+    {% else %}
+        <h2>
+            Поиск рецепта
+        </h2>
+        <p></p>
+        <form method="get">
+            {{ form.as_p }}
+            <input type="submit" value="Поиск">
+        </form>
+    {% endif %}
+{% endblock %}

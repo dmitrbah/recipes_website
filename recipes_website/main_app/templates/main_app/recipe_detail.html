@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{recipe.name}}{% endblock %}
+{% block content %}
+<h1>{{recipe.name}}</h1>
+<p class="date">
+  Published {{recipe.published}} by {{recipe.author}}
+</p>
+<p>Краткое описание рецепта: {{recipe.description}}</p>
+<p class="cooking-time">Время приготовления: {{recipe.cooking_time}}</p>
+<p class="cooking-instructions">
+{{recipe.cooking_instructions|linebreaks}}</p>
+{% with comments.count as total_comments %}
+  <h2>
+    Общее количество комментариев {{total_comments}}
+  </h2>
+{% endwith %}
+{% for comment in comments %}
+  <div class="comment">
+    <p class="info">
+      Comment {{forloop.counter}} by {{comment.name}}
+      {{comment.created}}
+    </p>
+    {{comment.body|linebreaks}}
+  </div>
+{% empty %}
+{% endfor %}
+{% include "main_app/includes/comment_form.html" %}
+{% endblock %}
