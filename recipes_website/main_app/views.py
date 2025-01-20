@@ -69,11 +69,8 @@ def recipe_search(request):
 def add_recipe(request):
     if request.method == 'POST':
         recipe = None
-        form = RecipeForm(data=request.POST)
-        print('POST')
-        print(form)
+        form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
-            print('yes')
             recipe = form.save(commit=False)
             recipe.author = request.user
             recipe.status = Recipe.Status.PUBLISHED

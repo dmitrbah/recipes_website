@@ -9,6 +9,9 @@
 <p class="cooking-time">Время приготовления: {{recipe.cooking_time}}</p>
 <p class="cooking-instructions">
 {{recipe.cooking_instructions|linebreaks}}</p>
+{% if recipe.image %}
+<img src="{{recipe.image.url}}" width="70%" height="70%" alt="recipe.img.name">
+{% endif %}
 {% with comments.count as total_comments %}
   <h2>
     Общее количество комментариев {{total_comments}}

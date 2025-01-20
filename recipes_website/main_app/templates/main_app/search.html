@@ -9,8 +9,11 @@
             <h1>Найдены следующие результаты:</h1>
             <h4>
                 <a href="{{recipe.get_absolute_url}}">{{recipe.name}}</a>
+                {% if recipe.image %}
+                {% endif %}
             </h4>
-            {{recipe.description|truncatewords:15}}
+            <p>{{recipe.description|truncatewords:15}}</p>
+            <img src="{{recipe.image.url}}" width="35%" height="35%" alt="recipe.img.name">
         {% empty %}
             <p>Результаты поиска отсутствуют</p>
         {% endfor %}

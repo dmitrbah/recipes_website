@@ -2,7 +2,7 @@
 {% block title %}Добавление рецепта{% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
-    <form action="{% url 'main_app:add_recipe' %}" method="post">
+    <form action="{% url 'main_app:add_recipe' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <p><input type="submit" value="Добавьте рецепт"></p>

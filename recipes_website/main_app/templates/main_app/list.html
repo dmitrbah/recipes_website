@@ -10,6 +10,9 @@
             Published {{recipe.published}} by {{recipe.author}}
         </p>
         {{recipe.description|truncatewords:30|linebreaks}}
+        {% if recipe.image %}
+        <img src="{{recipe.image.url}}" width="35%" height="35%" alt="recipe.img.name">
+{% endif %}
     {% endfor %}
     {% include "pagination.html" with page=recipes %}
 {% endblock %}

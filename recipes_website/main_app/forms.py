@@ -16,4 +16,4 @@ class SearchForm(forms.Form):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ['name', 'description', 'cooking_instructions', 'cooking_time']
+        fields = ['name', 'description', 'cooking_instructions', 'cooking_time', 'image']

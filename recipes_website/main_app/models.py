@@ -9,6 +9,13 @@ class PublishedManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status=Recipe.Status.PUBLISHED)
 
+def recipe_image_directory_path(instance: "Recipe", filename: str) -> str:
+    return "recipes/recipe_{pk}/image/{filename}".format(
+        pk=instance.pk,
+        filename=filename
+    )
+
+
 
 class Recipe(models.Model):
     class Status(models.TextChoices):
@@ -25,6 +32,7 @@ class Recipe(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
+    image = models.ImageField(null=True, blank=True, upload_to=recipe_image_directory_path)
 
     objects = models.Manager()
     published_recipes = PublishedManager()
