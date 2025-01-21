@@ -85,7 +85,7 @@ def add_recipe(request):
 
 class RecipeUpdateView(UpdateView):
     model = Recipe
-    fields = ['name', 'description', 'cooking_instructions', 'cooking_time', 'image']
+    fields = ['name', 'description', 'cooking_instructions', 'cooking_time', 'image', 'categories']
     template_name_suffix = "_update_form"
 
     def get_success_url(self):

@@ -15,6 +15,11 @@ def recipe_image_directory_path(instance: "Recipe", filename: str) -> str:
         filename=filename
     )
 
+class Category(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Recipe(models.Model):
@@ -33,6 +38,7 @@ class Recipe(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
     image = models.ImageField(null=True, blank=True, upload_to=recipe_image_directory_path)
+    categories = models.ManyToManyField(Category, blank=True)
 
     objects = models.Manager()
     published_recipes = PublishedManager()

@@ -16,6 +16,7 @@
 </p>
 <p>Краткое описание рецепта: {{recipe.description}}</p>
 <p class="cooking-time">Время приготовления: {{recipe.cooking_time}}</p>
+<p style="border-bottom: 1px solid #777; padding: 0 0 10px 0;">Категории: {{recipe.categories.all|join:', '}}</p>
 <p class="cooking-instructions">
 {{recipe.cooking_instructions|linebreaks}}</p>
 {% if recipe.image %}
