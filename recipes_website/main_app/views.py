@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
+
 from .models import Recipe, Comment
 from .forms import CommentForm, SearchForm, RecipeForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.http import require_POST
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from django.views.generic import UpdateView, DeleteView
 
 def recipe_list(request):
     recipe_list = Recipe.published_recipes.all()
@@ -78,4 +81,18 @@ def add_recipe(request):
             return HttpResponseRedirect('/')
     form = RecipeForm()
     return render(request, 'main_app/add_recipe.html', {'form': form})
+
+
+class RecipeUpdateView(UpdateView):
+    model = Recipe
+    fields = ['name', 'description', 'cooking_instructions', 'cooking_time', 'image']
+    template_name_suffix = "_update_form"
+
+    def get_success_url(self):
+        return Recipe.get_absolute_url(self.object)
+
+
+class RecipeDeleteView(DeleteView):
+    model = Recipe
+    success_url = reverse_lazy("main_app:recipe_list")
 

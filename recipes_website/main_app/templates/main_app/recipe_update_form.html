@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Обновить рецепт
+{% endblock %}
+
+{% block content %}
+  <h2>Обновить рецепт</h2>
+  <p></p>
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Обновить</button>
+    </form>
+  </div>
+  <p></p>
+  <div>
+    <a href="{{object.get_absolute_url}}">Назад к рецепту</a>
+  </div>
+{% endblock %}

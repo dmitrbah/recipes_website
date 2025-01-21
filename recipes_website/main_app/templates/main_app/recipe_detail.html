@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block title %}{{recipe.name}}{% endblock %}
 {% block content %}
+<div>
+  {% if user == recipe.author %}
+  <h2>Этот Ваш рецепт. Можете его обновить или удалить.</h2>
+  <p></p>
+  <div><a href="{% url 'main_app:recipe_update' pk=recipe.pk %}">Обновить рецепт</a></div>
+  <br>
+  <div><a href="{% url 'main_app:recipe_delete' pk=recipe.pk %}">Удалить рецепт</a></div>
+  {% endif %}
+</div>
 <h1>{{recipe.name}}</h1>
 <p class="date">
   Published {{recipe.published}} by {{recipe.author}}
